@@ -18,13 +18,10 @@ class DB {
         employee_id,
       ]);
   }
-  createEmployee(first_name, last_name, role_id, manager_id) {
+  createEmployee(employee) {
     return this.connection
       .promise()
-      .query(
-        "INSERT INTO employee (first_name, last_name, role_id, manager_id,) VALUES (?, ?, ?, ?) ;",
-        [first_name, last_name, role_id, manager_id]
-      );
+      .query("INSERT INTO employee SET ?;", [employee]);
   }
   removeEmployee(employee_id) {
     return this.connection
