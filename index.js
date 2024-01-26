@@ -223,7 +223,7 @@ function removeRole() {
       {
         type: "input",
         name: "roleId",
-        message: "enter the id of the employee you want removed.",
+        message: "enter the id of the role you want removed.",
       },
     ])
     .then((inquirerResponse) => {
@@ -264,7 +264,7 @@ function createDepartment() {
       {
         type: "input",
         name: "depName",
-        message: "Whats the name of the m=new departmentdd",
+        message: "Whats the name of the new department",
       },
     ])
 

@@ -28,22 +28,7 @@ class DB {
       .promise()
       .query("DELETE FROM employee WHERE id = ?;", [employee_id]);
   }
-  updateEmployeeRole(employee_id, role_id) {
-    return this.connection
-      .promise()
-      .query("UPDATE employee SET role_id =? WHERE id = ?;", [
-        role_id,
-        employee_id,
-      ]);
-  }
-  updateEmployeeManager(employee_id, manager_id) {
-    return this.connection
-      .promise()
-      .query("UPDATE employee SET manager_id =? WHERE id =?;", [
-        employee_id,
-        manager_id,
-      ]);
-  }
+
   findAllRoles() {
     return this.connection
       .promise()
@@ -64,13 +49,6 @@ class DB {
       .promise()
       .query("SELECT department.id, department.name FROM department;");
   }
-  viewDepartmentBudget() {
-    return this.connection
-      .promise()
-      .query(
-        "SELECT department.id, department.name SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id GROUP BY depatment.id, department.name;"
-      );
-  }
   createDepartment(department) {
     return this.connection
       .promise()
@@ -80,23 +58,6 @@ class DB {
     return this.connection
       .promise()
       .query("DELETE FROM department WHERE id = ?;", [department_id]);
-  }
-  findAllEmployeesByDepartment(department_id) {
-    return this.connection
-      .promise()
-      .query(
-        "SELECT employee.id, employee.first_name, employee.last_name, role.title FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id WHERE department.id = ?;",
-        [department_id]
-      );
-  }
-
-  findAllEmployeesByManager(manager_id) {
-    return this.connection
-      .promise()
-      .query(
-        "SELECT employee.id, employee.first_name, employee.last_name, department.name AS department, role.title FROM employee LEFT JOIN role on role.id = employee.role_id LEFT JOIN department ON department.id = role.department_id WHERE manager_id = ?;",
-        [manager_id]
-      );
   }
 }
 
